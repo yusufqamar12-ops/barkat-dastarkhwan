@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barkat Dastarkhwan | Bulk Catering in Aligarh</title>
+  <meta name="description" content="Barkat Dastarkhwan — bulk catering for Majlis, Tabarruk, functions and gatherings in Aligarh. Custom menus, orders by weight or portion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#0b4638;--green2:#08382e;--cream:#f7f0df;--gold:#c7a24b;--ink:#17342d;--white:#fff}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+    a{color:inherit;text-decoration:none}.container{width:min(1120px,92%);margin:auto}
+    nav{position:sticky;top:0;z-index:20;background:rgba(8,56,46,.96);color:white;border-bottom:1px solid rgba(199,162,75,.4)}
+    .navin{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-family:"Playfair Display",serif;font-size:25px;font-weight:700;letter-spacing:.5px}
+    .navlinks{display:flex;gap:25px;font-size:14px}.navlinks a:hover{color:#e1c777}
+    .hero{background:radial-gradient(circle at 80% 15%,#196451 0,#0b4638 36%,#06342b 100%);color:#fff;padding:82px 0 90px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}
+    .eyebrow{text-transform:uppercase;letter-spacing:4px;color:#e1c777;font-size:13px;font-weight:700}
+    h1{font-family:"Playfair Display",serif;font-size:clamp(48px,7vw,82px);line-height:.98;margin:14px 0 20px}
+    .hero h2{font-family:"Playfair Display",serif;font-size:28px;font-weight:600;margin:0 0 15px}
+    .hero p{font-size:18px;color:#e9eee9;max-width:620px}
+    .buttons{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 21px;border-radius:999px;font-weight:700}
+    .btn-primary{background:#d5b35d;color:#17342d}.btn-outline{border:1px solid rgba(255,255,255,.45);color:white}
+    .hero-card{border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.18);background:linear-gradient(145deg,#b47b35,#6b381b);min-height:400px;display:flex;align-items:flex-end;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.25)}
+    .hero-card .food{width:100%;height:350px;border-radius:22px;background:
+      radial-gradient(circle at 38% 42%,#f0c35a 0 7%,transparent 8%),
+      radial-gradient(circle at 57% 58%,#a94c20 0 10%,transparent 11%),
+      radial-gradient(circle at 50% 50%,#e1a73e 0 32%,#b96a24 33% 49%,#75401e 50% 57%,transparent 58%),
+      linear-gradient(145deg,#e8d5a4,#6c351b);
+      box-shadow:inset 0 0 0 15px rgba(44,24,12,.16);position:relative}
+    .hero-card .food:after{content:"CHICKEN BIRYANI  •  CHICKEN KORMA";position:absolute;bottom:20px;left:20px;right:20px;background:rgba(5,44,35,.88);color:#fff;padding:12px;text-align:center;border-radius:12px;font-weight:700;letter-spacing:1px;font-size:12px}
+    section{padding:82px 0}.section-title{text-align:center;max-width:720px;margin:0 auto 45px}
+    .section-title .eyebrow{color:var(--green)}h2{font-family:"Playfair Display",serif;font-size:42px;line-height:1.1;margin:9px 0 13px}
+    .section-title p{color:#53655f}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fffaf0;border:1px solid #eadfc7;border-radius:22px;padding:30px;box-shadow:0 8px 30px rgba(39,50,43,.06)}
+    .icon{width:48px;height:48px;border-radius:50%;background:var(--green);color:#e1c777;display:grid;place-items:center;font-size:22px;margin-bottom:18px}
+    .card h3{font-family:"Playfair Display",serif;font-size:24px;margin:0 0 7px}.card p{margin:0;color:#5d6a64}
+    .signature{background:#fffaf0}.dish-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .dish{min-height:300px;border-radius:26px;padding:30px;display:flex;align-items:flex-end;color:white;overflow:hidden;position:relative;background:#7a3f20}
+    .dish:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#e6b64f 0 13%,#bd6d27 14% 28%,transparent 29%),linear-gradient(145deg,#c88a39,#63321b)}
+    .dish.korma:before{background:radial-gradient(circle at 50% 45%,#d89a54 0 18%,#a85c2d 19% 32%,transparent 33%),linear-gradient(145deg,#d5a05d,#6b351e)}
+    .dish-content{position:relative;z-index:1;background:linear-gradient(transparent,rgba(0,0,0,.78));margin:-30px;padding:80px 30px 30px;width:calc(100% + 60px)}
+    .dish h3{font-family:"Playfair Display",serif;font-size:30px;margin:0}.dish p{margin:5px 0 0;color:#f4ead7}
+    .cta{background:var(--green);color:#fff}.cta-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}.cta h2{color:white}.cta p{color:#dbe8e2}
+    .contact-box{background:#fffaf0;color:var(--ink);padding:28px;border-radius:22px}.contact-row{padding:12px 0;border-bottom:1px solid #e5dcc9}.contact-row:last-child{border-bottom:0}
+    footer{background:#062d25;color:#cbd9d3;padding:28px 0;text-align:center;font-size:14px}
+    @media(max-width:800px){.navlinks{display:none}.hero{padding:60px 0}.hero-grid,.cta-grid,.dish-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}section{padding:62px 0}.hero-card{min-height:300px}.hero-card .food{height:260px}h2{font-size:35px}}
+  </style>
+</head>
+<body>
+<nav><div class="container navin">
+  <a class="brand" href="#">Barkat Dastarkhwan</a>
+  <div class="navlinks"><a href="#about">About</a><a href="#specialties">Specialties</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+</div></nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Bulk Catering • Majlis • Tabarruk • Functions</div>
+      <h1>Barkat<br>Dastarkhwan</h1>
+      <h2>Made for Gatherings. Shared with Love.</h2>
+      <p>Your menu. Our kitchen. We prepare the dishes you love, in the quantity you need — for family gatherings, Majlis, Tabarruk and functions.</p>
+      <div class="buttons">
+        <a class="btn btn-primary" href="https://wa.me/918279409493?text=Assalamualaikum%2C%20I%27d%20like%20to%20enquire%20about%20a%20Barkat%20Dastarkhwan%20catering%20order.">WhatsApp Us</a>
+        <a class="btn btn-outline" href="tel:+918279409493">Call +91 8279409493</a>
+      </div>
+    </div>
+    <div class="hero-card"><div class="food"></div></div>
+  </div>
+</header>
+
+<section id="specialties" class="signature">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">Our Signatures</div>
+      <h2>Two favourites. Any menu you want.</h2>
+      <p>Chicken Biryani and Chicken Korma are our signature dishes, while custom menus are always welcome.</p>
+    </div>
+    <div class="dish-grid">
+      <div class="dish"><div class="dish-content"><h3>Chicken Biryani</h3><p>A signature favourite for gatherings and bulk orders.</p></div></div>
+      <div class="dish korma"><div class="dish-content"><h3>Chicken Korma</h3><p>Another Barkat favourite, prepared for your gathering.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">What We Offer</div>
+      <h2>Simple catering, made around your needs.</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="icon">🍽</div><h3>Custom Menus</h3><p>Choose any dish or menu you need. Tell us what you want and we prepare it for your gathering.</p></div>
+      <div class="card"><div class="icon">⚖</div><h3>Flexible Orders</h3><p>Orders can be placed <strong>by weight or by portion</strong>, depending on your requirement.</p></div>
+      <div class="card"><div class="icon">✦</div><h3>Tabarruk</h3><p>Individual portions prepared and packed for distribution.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="signature">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">For Your Gathering</div>
+      <h2>Majlis • Tabarruk • Functions</h2>
+      <p>From a family gathering to a larger function, Barkat Dastarkhwan is built around bulk food orders — with the menu and quantity shaped around your occasion.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container cta-grid">
+    <div>
+      <div class="eyebrow">Let's Plan Your Order</div>
+      <h2>Tell us the occasion. We'll take care of the food.</h2>
+      <p>Send us your date, location, required dishes and quantity. Orders are available by weight or portion.</p>
+      <a class="btn btn-primary" href="https://wa.me/918279409493?text=Assalamualaikum%2C%20I%27d%20like%20a%20quote%20for%20a%20Barkat%20Dastarkhwan%20order.">Start on WhatsApp</a>
+    </div>
+    <div class="contact-box">
+      <div class="contact-row"><strong>WhatsApp / Call</strong><br>+91 8279409493</div>
+      <div class="contact-row"><strong>Location</strong><br>Gule Zehra Manzil, Tayyab Colony, Aligarh</div>
+      <div class="contact-row"><strong>Orders</strong><br>By weight • By portion • Custom menu</div>
+    </div>
+  </div>
+</section>
+
+<footer>© Barkat Dastarkhwan • Bulk Catering for Every Gathering</footer>
+</body>
+</html>
