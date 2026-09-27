@@ -3,6 +3,8 @@ package com.barkat.dastarkhwan
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -157,6 +159,9 @@ private fun QuoteScreen(onBack: () -> Unit) {
     var packCount by remember { mutableStateOf("200") }
     var includeTabarruk by remember { mutableStateOf(false) }
     var showSuccess by remember { mutableStateOf(false) }
+    var submitting by remember { mutableStateOf(false) }
+    var submitError by remember { mutableStateOf<String?>(null) }
+    var requestResponse by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -282,11 +287,29 @@ private fun QuoteScreen(onBack: () -> Unit) {
             )
 
             Button(
-                onClick = { showSuccess = true },
+                onClick = {
+                    submitting = true
+                    submitError = null
+                    val normalizedPhone = normalizePhone(phone)
+                    val catering = cateringItems.filter { it.name.isNotBlank() }.joinToString("\n") { "${it.name}: ${it.quantity} ${it.unit}" }
+                    val tabarruk = if (includeTabarruk) {
+                        "Tabarruk packs: $packCount\n" + tabarrukItems.filter { it.name.isNotBlank() }.joinToString("\n") { "${it.name}: ${it.perPack} per pack" }
+                    } else "Tabarruk: Not requested"
+                    val details = "Event date: $eventDate\nEvent time: $eventTime\nLocation: $location\n\nRegular catering:\n$catering\n\n$tabarruk\n\nSpecial requirements: $specialRequirements"
+                    SupabaseClient.submitQuote(name, normalizedPhone, occasion, details) { result ->
+                        Handler(Looper.getMainLooper()).post {
+                            submitting = false
+                            result.onSuccess {
+                                requestResponse = it
+                                showSuccess = true
+                            }.onFailure { submitError = it.message ?: "Could not submit request." }
+                        }
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Green),
-                enabled = name.isNotBlank() && phone.isNotBlank() && eventDate.isNotBlank()
-            ) { Text("Submit Quote Request", fontWeight = FontWeight.Bold) }
+                enabled = name.isNotBlank() && phone.isNotBlank() && eventDate.isNotBlank() && !submitting
+            ) { Text(if (submitting) "Sending…" else "Submit Quote Request", fontWeight = FontWeight.Bold) }
 
             Text(
                 "No online payment. Barkat will review your request and send a quote. Delivery is quoted separately when applicable.",
@@ -294,11 +317,17 @@ private fun QuoteScreen(onBack: () -> Unit) {
                 modifier = Modifier.fillMaxWidth()
             )
 
+            submitError?.let { error ->
+                Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFE8E3)), shape = RoundedCornerShape(20.dp)) {
+                    Text("Could not submit: $error", color = Color(0xFF8A2F25), modifier = Modifier.padding(16.dp))
+                }
+            }
+
             if (showSuccess) {
                 Card(colors = CardDefaults.cardColors(containerColor = Green), shape = RoundedCornerShape(20.dp)) {
                     Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("Request ready", color = Gold, fontWeight = FontWeight.Bold)
-                        Text("Your details are captured. The next step is connecting this form to Supabase so Barkat receives the request and a request ID can be generated.", color = Color.White)
+                        Text("Your quote request has been sent to Barkat. Supabase response: $requestResponse", color = Color.White)
                     }
                 }
             }
@@ -309,4 +338,16 @@ private fun QuoteScreen(onBack: () -> Unit) {
 @Composable
 private fun SectionTitle(text: String) {
     Text(text, color = Green, fontSize = 19.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
+}
+
+
+private fun normalizePhone(input: String): String {
+    val digits = input.filter { it.isDigit() }
+    return when {
+        digits.startsWith("91") && digits.length == 12 -> "+$digits"
+        digits.length == 10 -> "+91$digits"
+        digits.startsWith("0") && digits.length == 11 -> "+91${digits.drop(1)}"
+        input.trim().startsWith("+") -> "+$digits"
+        else -> "+91$digits"
+    }
 }
